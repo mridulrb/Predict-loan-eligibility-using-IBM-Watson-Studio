@@ -23,10 +23,10 @@ After completing this tutorial, you’ll understand how to:
 ## Prerequisites
 In order to complete this tutorial, you will need the following:
 
-* IBM Cloud account.
-* Object Storage Service.
-* Watson Studio Service.
-* Machine Learning Service.
+* [IBM Cloud](https://www.ibm.com/cloud) account.
+* [Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
+* [Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
+* [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
 
 ## Estimated time
 The overall time of reading and following this tutorial is approximately one hour.
