@@ -26,6 +26,7 @@ In order to complete this tutorial, you will need the following:
 * [IBM Cloud](https://www.ibm.com/cloud) account.
 * [Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
 * [Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
+* [SPSS Modeler](
 * [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
 
 ## Estimated time
@@ -37,20 +38,20 @@ The dataset is from [Analytics Vidhya](https://datahack.analyticsvidhya.com/cont
 
 The format of the data:
 
-**Variable Description**
-* **Loan_ID Unique Loan ID**
-* **Gender Male/ Female**
-* **Married Applicant married (Y/N)**
-* **Dependents Number of dependents**
-* **Education Applicant Education (Graduate/ Under Graduate)**
-* **Self_Employed Self employed (Y/N)**
-* **ApplicantIncome Applicant income**
-* **CoapplicantIncome Coapplicant income**
-* **LoanAmount Loan amount in thousands**
-* **Loan_Amount_Term Term of loan in months**
-* **Credit_History Credit history meets guidelines**
-* **Property_Area Urban/ Semi Urban/ Rural**
-* **Loan_Status Loan approved (Y/N)**
+* **Variable** Description
+* **Loan_ID** Unique Loan ID
+* **Gender** Male/ Female
+* **Married** Applicant married (Y/N)
+* **Dependents** Number of dependents
+* **Education** Applicant Education (Graduate/ Under Graduate)
+* **Self_Employed** Self employed (Y/N)
+* **ApplicantIncome** Applicant income
+* **CoapplicantIncome** Coapplicant income
+* **LoanAmount** Loan amount in thousands
+* **Loan_Amount_Term** Term of loan in months
+* **Credit_History** Credit history meets guidelines
+* **Property_Area** Urban/ Semi Urban/ Rural
+* **Loan_Status** Loan approved (Y/N)
 
 ### Step 1. Create a project in Watson Studio
 From Watson Studio main page, click on New project. Choose Complete to get the full functionalities. Once you enter your project name, click on Create.
