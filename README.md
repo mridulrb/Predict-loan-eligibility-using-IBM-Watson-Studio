@@ -37,7 +37,7 @@ The dataset is from [Analytics Vidhya](https://datahack.analyticsvidhya.com/cont
 
 The format of the data:
 
-* **Variable Description**
+**Variable Description**
 * **Loan_ID Unique Loan ID**
 * **Gender Male/ Female**
 * **Married Applicant married (Y/N)**
