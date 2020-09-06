@@ -26,7 +26,6 @@ In order to complete this tutorial, you will need the following:
 * [IBM Cloud](https://www.ibm.com/cloud) account.
 * [Object Storage](https://cloud.ibm.com/catalog/services/cloud-object-storage?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
 * [Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
-* [SPSS Modeler](
 * [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning?cm_sp=ibmdev-_-developer-tutorials-_-cloudreg) Service.
 
 ## Estimated time
