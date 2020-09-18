@@ -146,5 +146,8 @@ In the Asset page under Watson Machine Learning models you can access your saved
 
 ![Access saved model](doc/images/access_model.gif)
 
+## Notebook Details
+[Please click here for Jupyter Notebook Tutorial](loan-eligibility.md)
+
 ## Summary
 In this tutorial, you learned how to create a complete predictive model, from importing the data, preparing the data, to training and saving the model. You also learned how to use SPSS Modeler and export the model to Watson Machine Learning models
