@@ -17,7 +17,7 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
 1. [Model Building:Part 1](#Model-Building:Part-1)
 1. [Logistic Regression using stratified k-folds cross-validation](#Logistic-Regression-using-stratified-k-folds-cross-validation)
 1. [Feature Engineering](#Feature-Engineering)
-1. [Model Building:Part 2](#Model-Building:Part-2) <br />
+1. [Model Building:Part 2](#model-buildingpart2) <br />
     i. [Logistic Regression](#Logistic-Regression) <br />
     ii. [Decision Tree](#Decision-Tree) <br />
     iii. [Random Forest](#Random-Forest) <br />
