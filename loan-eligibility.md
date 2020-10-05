@@ -5,7 +5,7 @@ Loan companies grant a loan after an intensive process of verification and valid
 
 In this tutorial, we'll build a predictive model to help determine if an applicant will be able to repay the lending company or not. We will prepare the data using a Jupyter Notebook and use various models to predict the target variable.
 
-Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM-Watson-Studio) if you want to follow along with the code.
+Here's a [link to GitHub Repository](https://github.com/mridulrb/Predict-loan-eligibility-using-IBM-Watson-Studio) if you want to follow along with the code.
 
 ## Table of Contents
 1. [Getting the system ready and loading the data](#Getting-the-system-ready-and-loading-the-data)
