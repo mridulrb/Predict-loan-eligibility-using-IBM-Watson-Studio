@@ -1,26 +1,27 @@
 ## Introduction
-Loans are the core business of banks. The main profit comes directly from the loan's interest. The loan companies grant a loan after an intensive process of verification and validation. However, they still don't have assurance if the applicant is able to repay the loan with no difficulties.
+### Loans are the core business of banks. The main profit comes directly from the loan's interest. 
 
-In this tutorial, we'll build a predictive model to predict if an applicant is able to repay the lending company or not. We will prepare the data using Jupyter Notebook and use various models to predict the target variable.
+Loan companies grant a loan after an intensive process of verification and validation. However, they still don't know for sure if the applicant will be able to repay the loan with no difficulties.
 
-[Link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM-Watson-Studio)
+In this tutorial, we'll build a predictive model to help determine if an applicant will be able to repay the lending company or not. We will prepare the data using a Jupyter Notebook and use various models to predict the target variable.
+
+Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM-Watson-Studio) if you want to follow along with the code.
 
 ## Table of Contents
-1. Getting the system ready and loading the data
-1. Understanding the data
-1. Exploratory Data Analysis (EDA) <br />
-    i. Univariate Analysis <br />
-    ii. Bivariate Analysis
-1. Missing value and outlier treatment
-1. Evaluation Metrics for classification problems
-1. Model Building: Part 1
-1. Logistic Regression using stratified k-folds cross-validation
-1. Feature Engineering
-1. Model Building: Part 2 <br />
-    i. Logistic Regression <br />
-    ii. Decision Tree <br />
-    iii. Random Forest <br />
-    iv. XGBoost
+1. [Getting the system ready and loading the data](#Getting-the-system-ready-and-loading-the-data)
+1. [Understanding the data](Understanding-the-data)
+1. [Exploratory Data Analysis (EDA)](#Exploratory-Data-Analysis-(EDA)) <br />
+    i. [Univariate Analysis](#Univariate-Analysis) <br />
+    ii. [Bivariate Analysis](#Bivariate-Analysis)
+1. [Missing value](#Missing-value-imputation) and (outlier treatment](#Outlier-Treatment)
+1. [Model Building: Part 1](#Model-Building-:-Part-I)
+1. [Logistic Regression using stratified k-folds cross-validation](#Logistic-Regression-using-stratified-k-folds-cross-validation)
+1. [Feature Engineering](#Feature-Engineering)
+1. [Model Building: Part 2](#Model-Building-:-Part-II) <br />
+    i. [Logistic Regression](#Logistic-Regression) <br />
+    ii. [Decision Tree](#Decision-Tree) <br />
+    iii. [Random Forest](#Random-Forest) <br />
+    iv. [XGBoost](#XGBoost)
 
 ## Getting the system ready and loading the data
 We will be using Python for this course along with the below-listed libraries.
@@ -141,6 +142,8 @@ Now, let's visualize each variable separately. Different types of variables are 
 * Ordinal features: Variables in categorical features having some order involved (Dependents, Education, Property_Area)
 * Numerical features: These features have numerical values (ApplicantIncome, CoapplicantIncome, LoanAmount,Loan_Amount_Term)
 
+## Exploratory Data Analysis (EDA)
+## Univariate Analysis
 ## Independent Variable (Categorical)
 ```
 train['Gender'].value_counts(normalize=True).plot.bar(figsize=(20,10), title='Gender')
@@ -899,6 +902,7 @@ importances.plot(kind='barh', figsize=(12,8))
 ```
 ![Grid Search](doc/images/Grid_Search.png)
 We can see that Credit_History is the most important feature followed by Balance Income, Total Income, EMI. So, feature engineering helped us in predicting our target variable.
+
 ### XGBOOST
 XGBoost is a fast and efficient algorithm and has been used by the winners of many data science competitions. It's a boosting algorithm and you may refer the below article to know more about boosting:https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/
 XGBoost works only with numeric variables and we have already replaced the categorical variables with numeric variables. Let's have a look at the parameters that we are going to use in our model.
@@ -966,4 +970,10 @@ Sign-up for an **IBM Cloud** account to try this tutorial — [IBM Cloud](https:
 [Predict Loan Eligibility using Machine Learning Models](https://towardsdatascience.com/predict-loan-eligibility-using-machine-learning-models-7a14ef904057)
 
 ## Conclusion
-In this tutorial, we learned how to create models to predict the target variable, i.e. if the applicant will be able to repay the loan or not.
+In this tutorial, we learned how to create models to predict the target variable, that is whether the applicant will be able to repay the loan or not.
+
+This is a classification problem where we have to predict whether a loan will be approved or not. In a classification problem, we have to predict discrete values based on a given set of independent variable(s).
+
+Loan prediction is a very common real-life problem that each retail bank faces at least once in its lifetime. If done correctly, it can save many hours of work.
+
+Although this tutorial is specially built to give a walkthrough of a Loan Prediction problem, you can always refer the content to get a comprehensive overview to solve a classification problem.
