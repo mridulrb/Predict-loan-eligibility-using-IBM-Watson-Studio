@@ -24,7 +24,7 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
     iii. [Random Forest](#Random-Forest) <br />
     iv. [XGBoost](#XGBoost)
 1. [SPSS Modeler](#SPSS-Modeler)
-1. [Blogs](#Blog)
+1. [Blogs](#Blogs)
 1. [Conclusion](#Conclusion)
 
 ## Getting the system ready and loading the data
@@ -1073,7 +1073,7 @@ To create an SPSS Modeler Flow and build a machine learning model using it, foll
 
 Sign-up for an **IBM Cloud** account to try this tutorial — [IBM Cloud](https://ibm.biz/BdqQBT)
 
-## Blog 
+## Blogs 
 [Predict Loan Eligibility using Machine Learning Models - towards data science](https://towardsdatascience.com/predict-loan-eligibility-using-machine-learning-models-7a14ef904057)
 
 [Predict Loan Eligibility using Machine Learning Models - freeCodeCamp](https://www.freecodecamp.org/news/use-machine-learning-models-to-predict-loan-eligibility/)
