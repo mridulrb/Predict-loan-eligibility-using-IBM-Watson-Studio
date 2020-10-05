@@ -50,6 +50,7 @@ For this problem, we have three CSV files: train, test and sample submission.
 
 
 ## Reading data
+The first step is read the data. A pandas DataFrame is a two (or more) dimensional data structure – basically a table with rows and columns. The columns have names and the rows have indexes.
 ```
 train = pd.read_csv('Dataset/train.csv')
 train.head()
@@ -67,16 +68,28 @@ train_original=train.copy()
 test_original=test.copy()
 ```
 ## Understanding the data
+The objectives of data understanding are:
+
+* Understand the attributes of the data.
+* Summarize the data by identifying key characteristics, such as data volume and total number of variables in the data.
+* Understand the problems with the data, such as missing values, inaccuracies, and outliers.
+* Visualize the data to validate the key characteristics of the data or unearth problems with the summary statistics.
+
+The ```columns``` attribute can be utilized to see all the column labels.
 ```
 train.columns
+```
+```
 Index(['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education',
        'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
        'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status'],
       dtype='object')
 ```
-We have 12 independent variables and 1 target variable, i.e. Loan_Status in the train dataset.
+We have 12 independent variables and 1 target variable, ```Loan_Status``` in the train dataset.
 ```
 test.columns
+```
+```
 Index(['Loan_ID', 'Gender', 'Married', 'Dependents', 'Education',
        'Self_Employed', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
        'Loan_Amount_Term', 'Credit_History', 'Property_Area'],
@@ -103,19 +116,27 @@ Loan_Status           object
 dtype: object
 ```
 We can see there are three formats of data types:
-* object: Object format means variables are categorical. Categorical variables in our dataset are: Loan_ID, Gender, Married, Dependents, Education, Self_Employed, Property_Area, Loan_Status.
-* int64: It represents the integer variables. ApplicantIncome is of this format.
-* float64: It represents the variable which have some decimal values involved. They are also numerical
+* object: Object format means variables are categorical. Categorical variables in our dataset are: ```Loan_ID```, ```Gender```, ```Married```, ```Dependents```, ```Education```, ```Self_Employed```, ```Property_Area```, ```Loan_Status```.
+* int64: It represents the integer variables. ```ApplicantIncome``` is of this format.
+* float64: It represents the variable which have some decimal values involved. They are also numerical.
+
+The ```shape`` attribute can be utilized to find the shape of the underlying data:
 ```
 train.shape
+```
+```
 (614, 13)
 ```
 We have 614 rows and 13 columns in the train dataset.
 ```
 test.shape
+```
+```
 (367, 12)
 ```
 We have 367 rows and 12 columns in test dataset.
+
+To check the existing approvals, the ```value_counts()``` attribute can be used.
 ```
 train['Loan_Status'].value_counts()
 ```
@@ -139,9 +160,9 @@ train['Loan_Status'].value_counts().plot.bar()
 ![Understanding the Data](doc/images/Understanding_the_data.png)
 The loan of 422(around 69%) people out of 614 were approved.
 Now, let's visualize each variable separately. Different types of variables are Categorical, ordinal, and numerical.
-* Categorical features: These features have categories (Gender, Married, Self_Employed, Credit_History, Loan_Status)
-* Ordinal features: Variables in categorical features having some order involved (Dependents, Education, Property_Area)
-* Numerical features: These features have numerical values (ApplicantIncome, CoapplicantIncome, LoanAmount,Loan_Amount_Term)
+* Categorical features: These features have categories (```Gender```, ```Married```, ```Self_Employed```, ```Credit_History```, ```Loan_Status```)
+* Ordinal features: Variables in categorical features having some order involved (```Dependents```, ```Education```, ```Property_Area```)
+* Numerical features: These features have numerical values (```ApplicantIncome```, ```CoapplicantIncome```, ```LoanAmount```,```Loan_Amount_Term```)
 
 ## Exploratory Data Analysis (EDA)
 ## Univariate Analysis
@@ -158,13 +179,15 @@ plt.show()
 ```
 ![Independent Variable (Categorical)](doc/images/Independent_Variable_(Categorical)_1.png)
 ![Independent Variable (Categorical)](doc/images/Independent_Variable_(Categorical)_2.png)
+
 It can be inferred from the above bar plots that:
-80% of applicants in the dataset are male.
-Around 65% of the applicants in the dataset are married.
-Around 15% of applicants in the dataset are self-employed.
-Around 85% of applicants have repaid their doubts.
+* 80% of applicants in the dataset are male.
+* Around 65% of the applicants in the dataset are married.
+* Around 15% of applicants in the dataset are self-employed.
+* Around 85% of applicants have repaid their doubts.
 
 ## Independent Variable (Ordinal)
+An ordinal variable is similar to a categorical variable.  The difference between the two is that there is a clear ordering of the variables.
 ```
 train['Dependents'].value_counts(normalize=True).plot.bar(figsize=(24,6), title='Dependents')
 plt.show()
@@ -181,7 +204,9 @@ The following inferences can be made from the above bar plots:
 * Most of the applicants are from the Semiurban area.
 
 ## Independent Variable (Numerical)
-Till now we have seen the categorical and ordinal variables and now lets visualize the numerical variables. Lets look at the distribution of Applicant income first.
+Up to this point we have seen the categorical and ordinal variables. Now let's visualize the numerical variables.
+
+Let's look at the distribution of Applicant Income first.
 ```
 sns.distplot(train['ApplicantIncome'])
 plt.show()
@@ -190,8 +215,11 @@ plt.show()
 ```
 ![Independent_Variable_(Numerical)](doc/images/Independent_Variable_(Numerical)_1.png)
 
-It can be inferred that most of the data in the distribution of applicant income is towards left which means it is not normally distributed. We will try to make it normal in later sections as algorithms works better if the data is normally distributed.
-The boxplot confirms the presence of a lot of outliers/extreme values. This can be attributed to the income disparity in the society. Part of this can be driven by the fact that we are looking at people with different eduation levels. Let us segregate them by Education.
+We can infer that most of the data in the distribution of applicant income is towards the left, which means it is not normally distributed. We will try to make it normal in later sections, as algorithms works better if the data is normally distributed.
+
+The box plot confirms the presence of a lot of outliers/extreme values. This can be attributed to the income disparity in the society.
+
+Part of this might be driven by the fact that we are looking at people with different levels of education. To help sort that out, let us separate them by education.
 
 ```
 train.boxplot(column='ApplicantIncome', by = 'Education') 
@@ -210,7 +238,7 @@ plt.show()
 ```
 ![Independent_Variable_(Numerical)](doc/images/Independent_Variable_(Numerical)_3.png)
 
-We see a similar distribution as that of the applicant's income. The majority of co-applicants income ranges from 0 to 5000. We also see a lot of outliers in the applicant's income and it is not normally distributed.
+We see a similar distribution as that of the applicant's income. The majority of co-applicants' income ranges from 0 to 5000. We also see a lot of outliers in the applicant's income, and it is not normally distributed.
 ```
 train.notna()
 sns.distplot(train['LoanAmount'])
@@ -220,7 +248,7 @@ plt.show()
 ```
 ![Independent_Variable_(Numerical)](doc/images/Independent_Variable_(Numerical)_4.png)
 
-We see a lot of outliers in this variable and the distribution is fairly normal. We will treat the outliers in later sections.
+We see a lot of outliers in this variable, and the distribution is fairly normal. We will deal with the outliers in later sections.
 
 ## Bivariate Analysis
 Let's recall some of the hypotheses that we generated earlier:
@@ -230,17 +258,22 @@ Let's recall some of the hypotheses that we generated earlier:
 * Lesser the amount to be paid monthly to repay the loan, the higher the chances of loan approval.
 
 Let's try to test the above-mentioned hypotheses using bivariate analysis.
+
 After looking at every variable individually in univariate analysis, we will now explore them again with respect to the target variable.
+
 ## Categorical Independent Variable vs Target Variable
-First of all, we will find the relation between the target variable and categorical independent variables. Let us look at the stacked bar plot now which will give us the proportion of approved and unapproved loans.
+First of all, we will find the relationship between the target variable and the categorical independent variables.
+
+Let's look at the stacked bar plot now which will give us the proportion of approved and unapproved loans.
 ```
 Gender=pd.crosstab(train['Gender'],train['Loan_Status'])
 Gender.div(Gender.sum(1).astype(float), axis=0).plot(kind="bar",stacked=True,figsize=(4,4))
 plt.show()
 ```
 ![Categorical Independent Variable vs Target Variable](doc/images/Categorical_Independent_Variable_vs_Target_Variable_1.png)
-It can be inferred that the proportion of male and female applicants is more or less the same for both approved and unapproved loans.
-Now let us visualize the remaining categorical variables vs target variable.
+We can infer that the proportion of male and female applicants is more or less the same for both approved and unapproved loans.
+
+Now let's visualize the remaining categorical variables vs the target variable.
 ```
 Married=pd.crosstab(train['Married'],train['Loan_Status'])
 Dependents=pd.crosstab(train['Dependents'],train['Loan_Status'])
@@ -257,11 +290,13 @@ plt.show()
 ```
 ![Categorical Independent Variable vs Target Variable](doc/images/Categorical_Independent_Variable_vs_Target_Variable_2.png)
 ![Categorical Independent Variable vs Target Variable](doc/images/Categorical_Independent_Variable_vs_Target_Variable_3.png)
-* The proportion of married applicants is higher for approved loans.
-* Distribution of applicants with 1 or 3+ dependents is similar across both the categories of Loan_Status.
-* There is nothing significant we can infer from Self_Employed vs Loan_Status plot.
 
-Now we will look at the relationship between remaining categorical independent variables and Loan_Status.
+We can gather the following from these graphs:
+* The proportion of married applicants is higher for approved loans.
+* Distribution of applicants with 1 or 3+ dependents is similar across both the categories of ```Loan_Status```.
+* There is nothing significant we can infer from ```Self_Employed``` vs ```Loan_Status``` plot.
+
+Now we will look at the relationship between remaining categorical independent variables and ```Loan_Status```.
 ```
 Credit_History=pd.crosstab(train['Credit_History'],train['Loan_Status'])
 Property_Area=pd.crosstab(train['Property_Area'],train['Loan_Status'])
@@ -281,7 +316,9 @@ We will try to find the mean income of people for which the loan has been approv
 train.groupby('Loan_Status')['ApplicantIncome'].mean().plot.bar()
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_1.png)
-Here the y-axis represents the mean applicant income. We don't see any change in the mean income. So, let's make bins for the applicant income variable based on the values in it and analyze the corresponding loan status for each bin.
+Here the y-axis represents the mean applicant income. We don't see any change in the mean income. 
+
+So, let's make bins for the applicant income variable based on the values in it and analyze the corresponding loan status for each bin.
 ```
 bins=[0,2500,4000,6000,81000]
 group=['Low','Average','High','Very high']
@@ -293,7 +330,7 @@ P=plt.ylabel('Percentage')
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_2.png)
 It can be inferred that Applicant's income does not affect the chances of loan approval which contradicts our hypothesis in which we assumed that if the applicant's income is high the chances of loan approval will also be high.
-We will analyze the coapplicant income and loan amount variable in a similar manner.
+We will analyze the ```coapplicant income``` and ```loan amount``` variable in a similar manner.
 ```
 bins=[0,1000,3000,42000]
 group=['Low','Average','High']
@@ -304,8 +341,13 @@ plt.xlabel('CoapplicantIncome')
 P=plt.ylabel('Percentage')
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_3.png)
-It shows that if co-applicants income is less the chances of loan approval are high. But this does not look right. The possible reason behind this may be that most of the applicants don't have any co-applicant so the co-applicant income for such applicants is 0 and hence the loan approval is not dependent on it. So, we can make a new variable in which we will combine the applicant's and co-applicants income to visualize the combined effect of income on loan approval.
-Let us combine the Applicant Income and Co-applicant Income and see the combined effect of Total Income on the Loan_Status.
+The above graph shows that if the co-applicant's income is lower, the chances of loan approval are still high. But this does not look right.
+
+This may be because most of the applicants don't have any co-applicant so the co-applicant income for such applicants is 0. This means that the loan approval is not dependent on it.
+
+So, we can make a new variable in which we will combine the applicant's and co-applicants income to visualize the combined effect of income on loan approval.
+
+Let's combine the ```Applicant Income``` and ```Co-applicant Income``` and see the combined effect of ```Total Income``` on the ```Loan_Status```.
 ```
 train['Total_Income']=train['ApplicantIncome']+train['CoapplicantIncome']
 bins=[0,2500,4000,6000,81000]
@@ -317,7 +359,8 @@ plt.xlabel('Total_Income')
 P=plt.ylabel('Percentage')
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_4.png)
-We can see that Proportion of loans getting approved for applicants having low Total_Income is very less compared to that of applicants with Average, High & Very High Income.
+We can see that Proportion of loans getting approved for applicants having low ```Total_Income``` is very less compared to that of applicants with Average, High & Very High Income.
+
 Let's visualize the Loan Amount variable.
 ```
 bins=[0,100,200,700]
@@ -329,8 +372,11 @@ plt.xlabel('LoanAmount')
 P=plt.ylabel('Percentage')
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_5.png)
-It can be seen that the proportion of approved loans is higher for Low and Average Loan Amount as compared to that of High Loan Amount which supports our hypothesis in which we considered that the chances of loan approval will be high when the loan amount is less.
-Let's drop the bins which we created for the exploration part. We will change the 3+ in dependents variable to 3 to make it a numerical variable. We will also convert the target variable's categories into 0 and 1 so that we can find its correlation with numerical variables. One more reason to do so is few models like logistic regression takes only numeric values as input. We will replace N with 0 and Y with 1.
+We can see that the proportion of approved loans is higher for Low and Average Loan Amount compared to High Loan Amount. This supports our hypothesis in which we considered that the chances of loan approval would be high when the loan amount is lower.
+
+Let's drop the bins which we created for the exploration part. We will change the 3+ in the dependents variable to 3 to make it a numerical variable. We will also convert the target variable's categories into 0 and 1 so that we can find its correlation with numerical variables.
+
+One more reason to do so is that some models like logistic regression take only numeric values as input. We will replace N with 0 and Y with 1.
 ```
 train=train.drop(['Income_bin', 'Coapplicant_Income_bin', 'LoanAmount_bin', 'Total_Income_bin', 'Total_Income'], axis=1)
 train['Dependents'].replace('3+', 3,inplace=True)
@@ -338,14 +384,16 @@ test['Dependents'].replace('3+', 3,inplace=True)
 train['Loan_Status'].replace('N', 0,inplace=True)
 train['Loan_Status'].replace('Y', 1,inplace=True)
 ```
-Now let's look at the correlation between all the numerical variables. We will use the heat map to visualize the correlation. Heatmaps visualize data through variations in coloring. The variables with darker color means their correlation is more.
+Now let's look at the correlation between all the numerical variables. We will use the heat map to visualize the correlation.
+
+Heat maps visualize data through variations in coloring. The variables with darker colors have a stronger correlation.
 ```
 matrix = train.corr()
 f, ax = plt.subplots(figsize=(9,6))
 sns.heatmap(matrix,vmax=.8,square=True,cmap="BuPu", annot = True)
 ```
 ![Numerical Independent Variable vs Target Variable](doc/images/Numerical_Independent_Variable_vs_Targe_Variable_6.png)
-We see that the most correlate variables are (ApplicantIncome - LoanAmount) and (Credit_History - Loan_Status). LoanAmount is also correlated with CoapplicantIncome.
+We see that the most correlate variables are (```ApplicantIncome``` - ```LoanAmount```) and (```Credit_History``` - ```Loan_Status```). ```LoanAmount``` is also correlated with ```CoapplicantIncome```.
 ## Missing value imputation
 Let's list out feature-wise count of missing values.
 ```
@@ -367,13 +415,16 @@ Property_Area         0
 Loan_Status           0
 dtype: int64
 ```
-There are missing values in Gender, Married, Dependents, Self_Employed, LoanAmount, Loan_Amount_Term, and Credit_History features.
+There are missing values in ```Gender```, ```Married```, ```Dependents```, ```Self_Employed```, ```LoanAmount```, ```Loan_Amount_Term```, and ```Credit_History features```.
+
 We will treat the missing values in all the features one by one.
 We can consider these methods to fill the missing values:
+
 * For numerical variables: imputation using mean or median
 * For categorical variables: imputation using mode
 
-There are very less missing values in Gender, Married, Dependents, Credit_History, and Self_Employed features so we can fill them using the mode of the features.
+There are very less missing values in ```Gender```, ```Married, Dependents```, ```Credit_History```, and ```Self_Employed``` features so we can fill them using the mode of the features.
+
 ```
 train['Gender'].fillna(train['Gender'].mode()[0], inplace=True)
 train['Married'].fillna(train['Married'].mode()[0], inplace=True)
@@ -381,7 +432,7 @@ train['Dependents'].fillna(train['Dependents'].mode()[0], inplace=True)
 train['Self_Employed'].fillna(train['Self_Employed'].mode()[0], inplace=True)
 train['Credit_History'].fillna(train['Credit_History'].mode()[0], inplace=True)
 ```
-Now let's try to find a way to fill the missing values in Loan_Amount_Term. We will look at the value count of the Loan amount term variable.
+Now let's try to find a way to fill the missing values in ```Loan_Amount_Term```. We will look at the value count of the Loan amount term variable.
 ```
 train['Loan_Amount_Term'].value_counts()
 ```
@@ -402,7 +453,9 @@ It can be seen that in the loan amount term variable, the value of 360 is repeat
 ```
 train['Loan_Amount_Term'].fillna(train['Loan_Amount_Term'].mode()[0], inplace=True)
 ```
-Now we will see the LoanAmount variable. As it is a numerical variable, we can use mean or median to impute the missing values. We will use the median to fill the null values as earlier we saw that the loan amount has outliers so the mean will not be the proper approach as it is highly affected by the presence of outliers.
+Now we will see the ```LoanAmount``` variable. As it is a numerical variable, we can use mean or median to impute the missing values. 
+
+We will use the median to fill the null values as earlier we saw that the loan amount has outliers so the mean will not be the proper approach as it is highly affected by the presence of outliers.
 ```
 train['LoanAmount'].fillna(train['LoanAmount'].median(), inplace=True)
 ```
@@ -437,22 +490,36 @@ test['Loan_Amount_Term'].fillna(train['Loan_Amount_Term'].mode()[0], inplace=Tru
 test['LoanAmount'].fillna(train['LoanAmount'].median(), inplace=True)
 ```
 ## Outlier Treatment
-As we saw earlier in univariate analysis, LoanAmount contains outliers so we have to treat them as the presence of outliers affects the distribution of the data. Let's examine what can happen to a data set with outliers. For the sample data set:
+As we saw earlier in univariate analysis, the ```LoanAmount``` contains outliers. So we have to treat them as if the presence of outliers affects the distribution of the data.
+
+Let's examine what can happen to a data set with outliers.
+
+For the sample data set:
 1,1,2,2,2,2,3,3,3,4,4
-We find the following: mean, median, mode, and standard deviation
-Mean = 2.58
-Median = 2.5
-Mode=2
-Standard Deviation = 1.08
+
+We find the following: **mean**, **median**, **mode**, and **standard deviation**
+
+* Mean = 2.58
+* Median = 2.5
+* Mode=2
+* Standard Deviation = 1.08
+
 If we add an outlier to the data set:
 1,1,2,2,2,2,3,3,3,4,4,400
+
 The new values of our statistics are:
-Mean = 35.38
-Median = 2.5
-Mode=2
-Standard Deviation = 114.74
-It can be seen that having outliers often has a significant effect on the mean and standard deviation and hence affecting the distribution. We must take steps to remove outliers from our data sets.
-Due to these outliers bulk of the data in the loan amount is at the left and the right tail is longer. This is called right skewness. One way to remove the skewness is by doing the log transformation. As we take the log transformation, it does not affect the smaller values much but reduces the larger values. So, we get a distribution similar to normal distribution.
+
+* Mean = 35.38
+* Median = 2.5
+* Mode=2
+* Standard Deviation = 114.74
+
+We can see that having outliers often has a significant effect on the mean and standard deviation which affects the distribution. We should therefore remove outliers from our data sets.
+
+Because of these outliers, the bulk of the data in the loan amount is at the left and the right tail is longer. This is called right skewness.
+
+One way to remove the skewness is by doing a log transformation. As we take the log transformation, it does not affect the smaller values much but reduces the larger values. So, we get a distribution similar to normal distribution.
+
 Let's visualize the effect of log transformation. We will do similar changes to the test file simultaneously.
 ```
 train['LoanAmount_log']=np.log(train['LoanAmount'])
@@ -460,7 +527,9 @@ train['LoanAmount_log'].hist(bins=20)
 test['LoanAmount_log']=np.log(test['LoanAmount'])
 ```
 ![Outlier Treatment](doc/images/Outlier_Treatment.png)
-Now the distribution looks much closer to normal and the effect of extreme values has been significantly subsided. Let's build a logistic regression model and make predictions for the test dataset.
+Now the distribution looks much closer to normal and the effect of extreme values has been significantly reduced.
+
+Now let's build a logistic regression model and make predictions for the test dataset.
 
 ## Model Building:Part 1
 Let us make our first model predict the target variable. We will start with Logistic Regression which is used for predicting binary outcome.
@@ -468,24 +537,31 @@ Let us make our first model predict the target variable. We will start with Logi
 * Logistic regression is an estimation of Logit function. Logit function is simply a log of odds in favor of the event.
 * This function creates an S-shaped curve with the probability estimate, which is very similar to the required stepwise function
 
-To learn further on logistic regression, refer to this article: https://www.analyticsvidhya.com/blog/2015/10/basics-logistic-regression/
-Let's drop the Loan_ID variable as it does not have any effect on the loan status. We will do the same changes to the test dataset which we did for the training dataset.
+To learn further on logistic regression, refer to this [article] (https://www.analyticsvidhya.com/blog/2015/10/basics-logistic-regression/):
+
+Let's drop the ```Loan_ID``` variable as it does not have any effect on the loan status. We will do the same changes to the test dataset which we did for the training dataset.
+
 ```
 train=train.drop('Loan_ID',axis=1)
 test=test.drop('Loan_ID',axis=1)
 ```
 We will use scikit-learn (sklearn) for making different models which is an open source library for Python. It is one of the most efcient tool which contains many inbuilt functions that can be used for modeling in Python.
-To learn further about sklearn, refer here: http://scikit-learn.org/stable/tutorial/index.html
+
+To learn further about sklearn, you can [check out this video course](http://scikit-learn.org/stable/tutorial/index.html)
+
 Sklearn requires the target variable in a separate dataset. So, we will drop our target variable from the train dataset and save it in another dataset.
 ```
 X = train.drop('Loan_Status',1)
 y = train.Loan_Status
 ```
-Now we will make dummy variables for the categorical variables. Dummy variable turns categorical variables into a series of 0 and 1, making them lot easier to quantify and compare. Let us understand the process of dummies first:
-* Consider the "Gender" variable. It has two classes, Male and Female.
+Now we will make dummy variables for the categorical variables. Dummy variable turns categorical variables into a series of 0 and 1, making them lot easier to quantify and compare. 
+
+Let us understand the process of dummies first:
+* Consider the ```Gender``` variable. It has two classes, Male and Female.
 * As logistic regression takes only the numerical values as input, we have to change male and female into numerical value.
-* Once we apply dummies to this variable, it will convert the "Gender" variable into two variables(Gender_Male and Gender_Female), one for each class, i.e. Male and Female.
-* Gender_Male will have a value of 0 if the gender is Female and a value of 1 if the gender is Male.
+* Once we apply dummies to this variable, it will convert the ```Gender``` variable into two variables(```Gender_Male``` and ```Gender_Female```), one for each class, i.e. Male and Female.
+* ```Gender_Male``` will have a value of 0 if the gender is Female and a value of 1 if the gender is Male.
+
 ```
 X = pd.get_dummies(X)
 train=pd.get_dummies(train)
@@ -493,13 +569,15 @@ test=pd.get_dummies(test)
 ```
 Now we will train the model on training dataset and make predictions for the test dataset. But can we validate these predictions? One way of doing this is we can divide our train dataset into two parts: train and validation. We can train the model on this train part and using that make predictions for the validation part. In this way we can validate our predictions as we have the true predictions for the validation part (which we do not have for the test dataset).
 
-We will use the train_test_split function from sklearn to divide our train dataset. So, first let us import train_test_split.
+We will use the ```train_test_split``` function from sklearn to divide our train dataset. So, first let us import ```train_test_split```.
+
 ```
 from sklearn.model_selection import train_test_split
 x_train, x_cv, y_train, y_cv = train_test_split(X,y, test_size=0.3)
 ```
-The dataset has been divided into training and validation part. Let us import LogisticRegression and accuracy_score from sklearn and fit the logistic regression model.
-from sklearn.linear_model import LogisticRegression
+The dataset has been divided into training and validation part. Let us import LogisticRegression and ```accuracy_score``` from sklearn and fit the logistic regression model.
+from ```sklearn.linear_model``` import ```LogisticRegression```:
+
 ```
 from sklearn.metrics import accuracy_score
 model = LogisticRegression()
@@ -508,7 +586,9 @@ model.fit(x_train, y_train)
 ```
 LogisticRegression()
 ```
-Here the C parameter represents inverse of regularization strength. Regularization is applying a penalty to increasing the magnitude of parameter values in order to reduce overfitting. Smaller values of C specify stronger regularization. To learn about other parameters, refer here: http://scikit- learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+Here the C parameter represents inverse of regularization strength. Regularization is applying a penalty to increasing the magnitude of parameter values in order to reduce overfitting. Smaller values of C specify stronger regularization. 
+
+To learn about other parameters, you can [check out this article here.](http://scikit- learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
 Let's predict the Loan_Status for validation set and calculate its accuracy.
 ```
 pred_cv = model.predict(x_cv)
@@ -518,6 +598,7 @@ accuracy_score(y_cv,pred_cv)
 0.7891891891891892
 ```
 So our predictions are almost 80% accurate, i.e. we have identified 80% of the loan status correctly.
+
 Let's make predictions for the test dataset.
 ```
 pred_test = model.predict(test)
@@ -528,7 +609,7 @@ submission = pd.read_csv('Dataset/sample_submission.csv')
 submission.head()
 ```
 ![Model Building](doc/images/Model_Building-Part_I.png)
-We only need the Loan_ID and the corresponding Loan_Status for the final submission. we will fill these columns with the Loan_ID of test dataset and the predictions that we made, i.e., pred_test respectively.
+We only need the ```Loan_ID``` and the corresponding ```Loan_Status``` for the final submission. We will fill these columns with the ```Loan_ID``` of test dataset and the predictions that we made, ```pred_test```, respectively.
 ```
 submission['Loan_Status']=pred_test
 submission['Loan_ID']=test_original['Loan_ID']
@@ -542,21 +623,25 @@ Finally, we will convert the submission to .csv format.
 ```
 pd.DataFrame(submission, columns=['Loan_ID','Loan_Status']).to_csv('Output/logistic.csv')
 ```
+
 ## Logistic Regression using stratified k-folds cross-validation
-To check how robust our model is to unseen data, we can use Validation. It is a technique that involves reserving a particular sample of a dataset on which you do not train the model. Later, you test your model on this sample before finalizing it. Some of the common methods for validation are listed below:
+To check how robust our model is to unseen data, we can use Validation. This is a technique that involves reserving a particular sample of a dataset on which you do not train the model. Later, you test your model on this sample before finalizing it.
+
+Some of the common methods for validation are listed below:
 * The validation set approach
 * k-fold cross-validation
 * Leave one out cross-validation (LOOCV)
 * Stratified k-fold cross-validation
 
-If you wish to know more about validation techniques, then please refer this article: https://www.analyticsvidhya.com/blog/2018/05/improve-model-performance-cross-validation-in-python-r/
+If you wish to know more about validation techniques, then [please refer to this article.] (https://www.analyticsvidhya.com/blog/2018/05/improve-model-performance-cross-validation-in-python-r/)
+
 In this section, we will learn about stratified k-fold cross-validation. Let us understand how it works:
 * Stratification is the process of rearranging the data so as to ensure that each fold is a good representative of the whole.
 * For example, in a binary classification problem where each class comprises of 50% of the data, it is best to arrange the data such that in every fold, each class comprises of about half the instances.
 * It is generally a better approach when dealing with both bias and variance.
 * A randomly selected fold might not adequately represent the minor class, particularly in cases where there is a huge class imbalance.
 
-Let's import StratifiedKFold from sklearn and fit the model.
+Let's import ```StratifiedKFold``` from ```sklearn``` and fit the model.
 ```
 from sklearn.model_selection import StratifiedKFold
 ```
@@ -636,7 +721,7 @@ Let's check the distribution of Total Income.
 sns.distplot(train['Total_Income'])
 ```
 ![Feature Engineering](doc/images/Feature_Engineering_1.png)
-We can see it is shifted towards left, i.e., the distribution is right-skewed. So, let's take the log transformation to make the distribution normal.
+It can be seen, it is shifted towards the left, meaning the distribution is right-skewed. So, let's take the log transformation to make the distribution normal.
 ```
 train['Total_Income_log'] = np.log(train['Total_Income'])
 sns.distplot(train['Total_Income_log'])
@@ -659,13 +744,17 @@ test['Balance Income'] = test['Total_Income']-(test['EMI']*1000)
 sns.distplot(train['Balance Income'])
 ```
 ![Feature Engineering](doc/images/Feature_Engineering_4.png)
-Let us now drop the variables which we used to create these new features. Reason for doing this is, the correlation between those old features and these new features will be very high and logistic regression assumes that the variables are not highly correlated. We also wants to remove the noise from the dataset, so removing correlated features will help in reducing the noise too.
+Let us now drop the variables which we used to create these new features. Reason for doing this is, the correlation between those old features and these new features will be very high and logistic regression assumes that the variables are not highly correlated. 
+
+We also wants to remove the noise from the dataset, so removing correlated features will help in reducing the noise too.
 ```
 train=train.drop(['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term'], axis=1)
 test=test.drop(['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term'], axis=1)
 ```
 ## Model Building:Part 2
-After creating new features, we can continue the model building process. So we will start with logistic regression model and then move over to more complex models like RandomForest and XGBoost. We will build the following models in this section.
+After creating new features, we can continue the model building process. So we will start with logistic regression model and then move over to more complex models like RandomForest and XGBoost. 
+
+We will build the following models in this section.
 * Logistic Regression
 * Decision Tree
 * Random Forest
@@ -726,9 +815,14 @@ submission['Loan_Status'].replace(1, 'Y', inplace=True)
 pd.DataFrame(submission, columns=['Loan_ID','Loan_Status']).to_csv('Output/Log2.csv')
 ```
 ### Decision Tree
-Decision tree is a type of supervised learning algorithm(having a pre-defined target variable) that is mostly used in classification problems. In this technique, we split the population or sample into two or more homogeneous sets(or sub-populations) based on most significant splitter / differentiator in input variables.
+Decision tree is a type of supervised learning algorithm(having a pre-defined target variable) that is mostly used in classification problems. 
+
+In this technique, we split the population or sample into two or more homogeneous sets(or sub-populations) based on most significant splitter / differentiator in input variables.
+
 Decision trees use multiple algorithms to decide to split a node in two or more sub-nodes. The creation of sub-nodes increases the homogeneity of resultant sub-nodes. In other words, we can say that purity of the node increases with respect to the target variable.
-For detailed explanation visit https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/#six
+
+For detailed explanation [check out this article.](https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/#six)
+
 Let's fit the decision tree model with 5 folds of cross-validation.
 ```
 from sklearn import tree
@@ -779,13 +873,16 @@ submission['Loan_Status'].replace(1, 'Y', inplace=True)
 ```
 pd.DataFrame(submission, columns=['Loan_ID','Loan_Status']).to_csv('Output/DecisionTree.csv')
 ```
+
 ### Random Forest
 RandomForest is a tree-based bootstrapping algorithm wherein a certain no. of weak learners (decision trees) are combined to make a powerful prediction model.
+
 For every individual learner, a random sample of rows and a few randomly chosen variables are used to build a decision tree model.
+
 Final prediction can be a function of all the predictions made by the individual learners.
 In case of regression problem, the final prediction can be mean of all the predictions.
 
-For detailed explanation visit this article https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/
+For detailed explanation you can [check out this article.](https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/)
 ```
 from sklearn.ensemble import RandomForestClassifier
 i=1
@@ -824,8 +921,12 @@ accuracy_score 0.7540983606557377
 
  Mean Validation Accuracy 0.7947221111555378
 ```
-We will try to improve the accuracy by tuning the hyperparameters for this model. We will use grid search to get the optimized values of hyper parameters. Grid-search is a way to select the best of a family of hyper parameters, parametrized by a grid of parameters.
+We will try to improve the accuracy by tuning the hyperparameters for this model. 
+
+We will use grid search to get the optimized values of hyper parameters. Grid-search is a way to select the best of a family of hyper parameters, parametrized by a grid of parameters.
+
 We will tune the max_depth and n_estimators parameters. max_depth decides the maximum depth of the tree and n_estimators decides the number of trees that will be used in random forest model.
+
 ### Grid Search
 ```
 from sklearn.model_selection import GridSearchCV
@@ -903,15 +1004,18 @@ importances=pd.Series(model.feature_importances_, index=X.columns)
 importances.plot(kind='barh', figsize=(12,8))
 ```
 ![Grid Search](doc/images/Grid_Search.png)
-We can see that Credit_History is the most important feature followed by Balance Income, Total Income, EMI. So, feature engineering helped us in predicting our target variable.
+We can see that ```Credit_History``` is the most important feature followed by ```Balance Income```, ```Total Income```and ```EMI```. So, feature engineering helped us in predicting our target variable.
 
 ### XGBOOST
-XGBoost is a fast and efficient algorithm and has been used by the winners of many data science competitions. It's a boosting algorithm and you may refer the below article to know more about boosting:https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/
+XGBoost is a fast and efficient algorithm and has been used by the winners of many data science competitions. You can [learn more about it in this article.](https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/)
+
 XGBoost works only with numeric variables and we have already replaced the categorical variables with numeric variables. Let's have a look at the parameters that we are going to use in our model.
-n_estimator: This specifies the number of trees for the model.
-max_depth: We can specify the maximum depth of a tree using this parameter.
+
+* n_estimator: This specifies the number of trees for the model.
+* max_depth: We can specify the maximum depth of a tree using this parameter.
 
 GBoostError: XGBoost Library (libxgboost.dylib) could not be loaded. If you face this error in macOS, run ```brew install libomp``` in ```Terminal```
+
 ```
 from xgboost import XGBClassifier
 i=1 
@@ -962,9 +1066,7 @@ submission['Loan_Status'].replace(1, 'Y', inplace=True)
 pd.DataFrame(submission, columns=['Loan_ID','Loan_Status']).to_csv('Output/XGBoost.csv')
 ```
 ## SPSS Modeler
-To create an SPSS Modeler Flow and build a machine learning model using it, follow the instructions here:
-
-[Predict loan eligibility using IBM Watson Studio](https://developer.ibm.com/tutorials/predict-loan-eligibility-using-jupyter-notebook-ibm-spss-modeler/)
+To create an SPSS Modeler Flow and build a machine learning model using it, follow the instructions here: [Predict loan eligibility using IBM Watson Studio](https://developer.ibm.com/tutorials/predict-loan-eligibility-using-jupyter-notebook-ibm-spss-modeler/)
 
 Sign-up for an **IBM Cloud** account to try this tutorial — [IBM Cloud](https://ibm.biz/BdqQBT)
 
