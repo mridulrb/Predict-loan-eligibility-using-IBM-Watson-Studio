@@ -13,7 +13,8 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
 1. [Exploratory Data Analysis (EDA)](#Exploratory-Data-Analysis-(EDA)) <br />
     i. [Univariate Analysis](#Univariate-Analysis) <br />
     ii. [Bivariate Analysis](#Bivariate-Analysis)
-1. [Missing value](#Missing-value-imputation) and (outlier treatment)(#Outlier-Treatment)
+1. [Missing value](#Missing-value-imputation) 
+1. (Outlier Treatment)(#Outlier-Treatment)
 1. [Model Building: Part 1](#model-buildingpart1)
 1. [Logistic Regression using stratified k-folds cross-validation](#Logistic-Regression-using-stratified-k-folds-cross-validation)
 1. [Feature Engineering](#Feature-Engineering)
