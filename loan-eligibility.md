@@ -24,7 +24,7 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
     iii. [Random Forest](#Random-Forest) <br />
     iv. [XGBoost](#XGBoost)
 1. [SPSS Modeler](#SPSS-Modeler)
-1. [Blogs](#Blogs)
+1. [Blogs](#Blog)
 1. [Conclusion](#Conclusion)
 
 ## Getting the system ready and loading the data
