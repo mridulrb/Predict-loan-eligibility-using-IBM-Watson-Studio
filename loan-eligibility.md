@@ -23,6 +23,9 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
     ii. [Decision Tree](#Decision-Tree) <br />
     iii. [Random Forest](#Random-Forest) <br />
     iv. [XGBoost](#XGBoost)
+1. [SPSS Modeler](#SPSS-Modeler)
+1. [Blogs](#Blogs)
+1. [Conclusion](#Conclusion)
 
 ## Getting the system ready and loading the data
 We will be using Python for this course along with the below-listed libraries.
