@@ -14,10 +14,10 @@ Here's a [link to GitHub Repository](mridulrb/Predict-loan-eligibility-using-IBM
     i. [Univariate Analysis](#Univariate-Analysis) <br />
     ii. [Bivariate Analysis](#Bivariate-Analysis)
 1. [Missing value](#Missing-value-imputation) and (outlier treatment)(#Outlier-Treatment)
-1. [Model Building: Part 1](#Model-Building-:-Part-I)
+1. [Model Building: Part 1](#Model-Building:Part-1)
 1. [Logistic Regression using stratified k-folds cross-validation](#Logistic-Regression-using-stratified-k-folds-cross-validation)
 1. [Feature Engineering](#Feature-Engineering)
-1. [Model Building: Part 2](#Model-Building-:-Part-II) <br />
+1. [Model Building: Part 2](#Model-Building:Part-2) <br />
     i. [Logistic Regression](#Logistic-Regression) <br />
     ii. [Decision Tree](#Decision-Tree) <br />
     iii. [Random Forest](#Random-Forest) <br />
@@ -460,7 +460,8 @@ test['LoanAmount_log']=np.log(test['LoanAmount'])
 ```
 ![Outlier Treatment](doc/images/Outlier_Treatment.png)
 Now the distribution looks much closer to normal and the effect of extreme values has been significantly subsided. Let's build a logistic regression model and make predictions for the test dataset.
-## Model Building : Part I
+
+## Model Building:Part 1
 Let us make our first model predict the target variable. We will start with Logistic Regression which is used for predicting binary outcome.
 * Logistic Regression is a classification algorithm. It is used to predict a binary outcome (1 / 0, Yes / No, True / False) given a set of independent variables.
 * Logistic regression is an estimation of Logit function. Logit function is simply a log of odds in favor of the event.
@@ -662,7 +663,7 @@ Let us now drop the variables which we used to create these new features. Reason
 train=train.drop(['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term'], axis=1)
 test=test.drop(['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term'], axis=1)
 ```
-## Model Building : Part II
+## Model Building:Part 2
 After creating new features, we can continue the model building process. So we will start with logistic regression model and then move over to more complex models like RandomForest and XGBoost. We will build the following models in this section.
 * Logistic Regression
 * Decision Tree
