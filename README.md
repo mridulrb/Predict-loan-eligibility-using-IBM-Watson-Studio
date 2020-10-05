@@ -11,7 +11,7 @@ In this tutorial, we’ll build a predictive model to predict if an applicant is
 1. [Prerequisites](#Prerequisites)
 1. [Estimated time](#Estimated-time)
 1. [Steps](#Steps)
-1. [Notebook](#Notebook)
+1. [Notebook Details](#notebook-details)
 1. [Summary](#Summary)
 
 ## Learning objectives
