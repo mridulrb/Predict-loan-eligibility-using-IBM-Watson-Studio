@@ -10,6 +10,7 @@ In this tutorial, we’ll build a predictive model to predict if an applicant is
 1. [Learning Objectives](#learning-objectives)
 1. [Prerequisites](#Prerequisites)
 1. [Estimated time](#Estimated-time)
+1. [Architecture Diagram](#Architecture-Diagram)
 1. [Steps](#Steps)
 1. [Notebook Details](#notebook-details)
 1. [Summary](#Summary)
@@ -31,6 +32,9 @@ In order to complete this tutorial, you will need the following:
 
 ## Estimated time
 The overall time of reading and following this tutorial is approximately one hour.
+
+## Architecture Diagram
+![LoanEligibility](https://user-images.githubusercontent.com/12492961/118088775-a061bd80-b3d8-11eb-8f99-e20e0a328907.jpg)
 
 ## Steps
 ### Dataset
